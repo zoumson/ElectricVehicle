@@ -1,0 +1,59 @@
+April 21, 2020
+
+A probabilistic sequence model is a set of instructions for generating sequences:
+i.i.d. (independent identically distributed)
+Markov chain:probabilistic nature comes from the transition probabilities
+
+chance constrained programming 
+
+random variable 
+A random variable is simply an expression whose value is the outcome of a particular experiment.
+Just as in the case of other types of variables in mathematics, random variables can
+take on different values
+
+Distribution function of the random variable
+Assign probabilities to the possible outcomes(random variable) of the overall  experiment, all sum up to 1.
+
+stochastic variable 
+floor/ceilling notation
+The notation floor  of x means the greatest integer not exceeding x, and is read “floor of x"
+
+Probability serialization [continuous  variable => discrete variable ], dicreditazationn step size 
+Stochastic linear programming 
+
+Chance constraint code 
+Page 20 : formulation, page 50; code
+Page 23, main equation is 2.48
+% Probabilistic constraint
+% Example taken from [Kizbun, Kan 1996] "Reserving Air Tickets"
+% Parameters
+c = [300 30 1000 280 250];
+n =[350 350];
+mu = 1/20;
+alpha = 0.99;
+% Calculations
+F_ b = icdf('Exponential',alpha,mu);
+f_a = (1-exp(-20*F b))/(1-exp(-20)) - alpha;
+ a_b = log(1-((1-exp(-20*icdf('Exponential',alpha,mu)))/(1-exp(-20))-alpha)*(1-exp(-20)))/-20;
+ f = [-c(1) c(5) 1];
+ 
+ A = [0 1 0;
+ c(4)*a b 0 -1;
+c(4)*a b+c(2)*(1-a b)) 0 -1;
+(c(4)*a b+c(3)*(1-a b)) -(c(3)-c(2)) -1;
+ c(4)*F b 0 -1;
+ (c(4)*F b+c(2)*(1-F b)) 0 -1;
+ (c(4)*F b+c(3)*(1-F b)) -(c(3)-c(2)) -1];
+
+b = [n(2) 0 c(2)*n(1) c(3)*n(1) 0 c(2)*n(1) c(3)*n(1)]';
+
+ lb = [0 0 0]';
+ ub = [inf inf inf]';
+
+ [x, fval, EF] = linprog(f,A,b,[],[],lb,ub);
+
+
+
+
+
+
